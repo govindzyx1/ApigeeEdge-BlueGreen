@@ -1,0 +1,28 @@
+<AssignMessage name="AM-Response">
+    <Remove>
+        <Headers/>
+    </Remove>
+  <AssignVariable>
+    <Name>timeFormatString1</Name>
+    <Value>yyyyMMdd HH:mm:ss.SSS</Value> <!-- EEEE -->
+  </AssignVariable>
+    <AssignVariable>
+      <Name>mytime</Name>
+      <Template>{timeFormatUTCMs(timeFormatString1,system.timestamp)}</Template>
+    </AssignVariable>
+    <Set>
+        <StatusCode>200</StatusCode>
+        <ReasonPhrase>OK</ReasonPhrase>
+        <Payload contentType="application/json">{
+  "success" : true,
+  "time" : "{mytime}",
+  "apiproxy.name" : "{apiproxy.name}",
+  "apiproxy.revision" : "{apiproxy.revision}",
+  "environment.name" : "{environment.name}",
+  "system.uuid" : "{system.uuid}",
+  "selectedTarget" : "{selectedTarget}"
+}
+</Payload>
+    </Set>
+    <IgnoreUnresolvedVariables>true</IgnoreUnresolvedVariables>
+</AssignMessage>
